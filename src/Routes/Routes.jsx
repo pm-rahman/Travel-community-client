@@ -11,6 +11,8 @@ import CreateCommunity from "../Pages/CreateCommunity/CreateCommunity";
 import SingleCommunity from "../Pages/SingleCommunity/SingleCommunity";
 import CreatePost from "../Pages/CreatePost/CreatePost";
 import SinglePost from "../Pages/SinglePost/SinglePost";
+import EditCommunity from "../Pages/EditCommunity/editCommunity";
+import EditPost from "../Pages/EditPost/EditPost";
 
 const Routes = createBrowserRouter([
     {
@@ -24,10 +26,20 @@ const Routes = createBrowserRouter([
                 loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params.id}`),
                 element:<PrivateRouter><SingleCommunity/></PrivateRouter>
             },
+            { 
+                path:'/edit-community/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params.id}`),
+                element:<PrivateRouter><EditCommunity/></PrivateRouter>
+            },
             {
-                path:'/createPost/:id',
-                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params?.id}`),
+                path:'/create-post/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/create-post/${params?.id}`),
                 element:<PrivateRouter><CreatePost/></PrivateRouter>
+            },
+            {
+                path:'/edit-post/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/post/${params?.id}`),
+                element:<PrivateRouter><EditPost/></PrivateRouter>
             },
             {
                 path:'/post/:id',

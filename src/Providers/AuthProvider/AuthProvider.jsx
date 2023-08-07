@@ -34,7 +34,6 @@ const AuthProvider = ({ children }) => {
         return unsubscribe;
     }, []);
     const logOut = () => {
-        setIsLoading(true);
         return signOut(auth);
     }
 

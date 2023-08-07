@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import CommunityHeader from "./CommunityHeader";
 import { Icon } from "@iconify/react";
 import useAuth from "../../Hook/useAuth";
@@ -9,6 +9,7 @@ const SingleCommunity = () => {
     const communityInfo = useLoaderData();
     const { user } = useAuth();
     const [posts, setPosts] = useState([]);
+    const naviGate = useNavigate();
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_api}/posts/${communityInfo._id}`)
@@ -19,9 +20,31 @@ const SingleCommunity = () => {
             })
     }, [communityInfo]);
 
+    const postDeleteHandler = (id) => {
+        fetch(`${import.meta.env.VITE_api}/delete-post/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const communityDeleteHandler = (id) => {
+        fetch(`${import.meta.env.VITE_api}/delete-community/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                naviGate('/');
+            })
+            .catch(err => { console.log(err) })
+    }
+
     return (
         <>
-            <CommunityHeader communityInfo={communityInfo} />
+            <CommunityHeader communityInfo={communityInfo} communityDeleteHandler={communityDeleteHandler} />
             <div className="mt-3 grid md:grid-cols-3 gap-5">
                 <div className="border p-8 rounded">
                     <h6 className="font-semibold inline text-lg mb-2">Creator: {communityInfo?.name}</h6>
@@ -41,7 +64,7 @@ const SingleCommunity = () => {
 
                     {posts.length > 0
                         ? <div className="grid md:grid-cols-2 mt-4 gap-4">
-                            {posts.map(post => <Post key={post._id} post={post} />)}
+                            {posts.map(post => <Post key={post._id} post={post} postDeleteHandler={postDeleteHandler} />)}
                         </div>
                         : <h4 className="text-3xl text-center mt-4 font-semibold">No Post Available</h4>
                     }

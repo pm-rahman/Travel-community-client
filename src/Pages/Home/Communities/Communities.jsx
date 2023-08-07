@@ -4,7 +4,7 @@ import useAuth from "../../../Hook/useAuth";
 import { Icon } from "@iconify/react";
 
 const Communities = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const [communities, setCommunities] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -22,14 +22,12 @@ const Communities = () => {
                 ? <p className="text-center">Loading...</p>
                 : <div className="border rounded p-12">
                     <h4 className="text-center text-3xl mb-7 font-semibold">All Communities</h4>
-                    {user?.email
-                        && <div className="flex justify-end">
-                            <Link to="/create-community" className="border p-2 mb-5 rounded flex items-center gap-2">
-                                <span>Create Community</span>
-                                <Icon className="text-xl" icon="fa-solid:plus-circle" />
-                            </Link>
-                        </div>
-                    }
+                    <div className="flex justify-end">
+                        <Link to="/create-community" className="border p-2 mb-5 rounded flex items-center gap-2">
+                            <span>Create Community</span>
+                            <Icon className="text-xl" icon="fa-solid:plus-circle" />
+                        </Link>
+                    </div>
                     {communities.length > 0
                         ? <div className="grid grid-cols-3 gap-5">
                             {communities.map(community => <Link
