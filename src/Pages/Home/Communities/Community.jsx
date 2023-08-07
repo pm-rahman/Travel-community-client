@@ -25,7 +25,7 @@ const Community = ({ community }) => {
                     </div>
                 </div>
                 <h2 className="text-xl font-semibold">{communityName}</h2>
-                <Link to={`/category/${community?._id}`} className="btn btn-info w-full mt-2 text-white">Details</Link>
+                <Link to={`/community/${community?._id}`} className="btn btn-info w-full mt-2 text-white">Details</Link>
             </div>
         </div>
     );

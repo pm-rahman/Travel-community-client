@@ -2,7 +2,6 @@ import TextModifier from "react-text-modifier";
 
 const SingleBanner = ({ slider={} }) => {
     const { bg, title } = slider;
-    console.log(slider);
     return (
         <>
             <div

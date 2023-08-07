@@ -9,6 +9,8 @@ import Register from "../Pages/Login/Register";
 import PrivateRouter from "./PrivateRouter";
 import CreateCommunity from "../Pages/CreateCommunity/CreateCommunity";
 import SingleCommunity from "../Pages/SingleCommunity/SingleCommunity";
+import CreatePost from "../Pages/CreatePost/CreatePost";
+import SinglePost from "../Pages/SinglePost/SinglePost";
 
 const Routes = createBrowserRouter([
     {
@@ -18,9 +20,19 @@ const Routes = createBrowserRouter([
             { path: '/', element: <Home /> },
             { path: '/create-community', element: <PrivateRouter><CreateCommunity/></PrivateRouter> },
             { 
-                path:'/category/:id',
-                // loader: ({params})=>fetch(`${import.meta.env.VITE_api}/category/${params.id}`),
+                path:'/community/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params.id}`),
                 element:<PrivateRouter><SingleCommunity/></PrivateRouter>
+            },
+            {
+                path:'/createPost/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params?.id}`),
+                element:<PrivateRouter><CreatePost/></PrivateRouter>
+            },
+            {
+                path:'/post/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/post/${params?.id}`),
+                element:<PrivateRouter><SinglePost/></PrivateRouter>
             },
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> }
