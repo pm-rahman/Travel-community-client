@@ -17,6 +17,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
+    "react-text-modifier": "^1.0.0",
     "sort-by": "^1.2.0",
     "swiper": "^10.1.0"
   },

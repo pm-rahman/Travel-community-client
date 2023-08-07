@@ -24,7 +24,6 @@ const Navbar = () => {
     window.addEventListener('scroll', scrollStart);
     const navLink = <>
         <li><ActiveLink to="/"><Icon className="text-xl" icon="heroicons-outline:home" /><span>Home</span></ActiveLink></li>
-        <li><ActiveLink to='/communities'><Icon className="text-xl" icon="mdi:account-multiple-check" /><span>Communities</span></ActiveLink></li>
         {user ? <>
             <li><ActiveLink to="/create-community"><Icon className="text-xl" icon="mdi:account-multiple-plus" /><span>Create Community</span></ActiveLink></li>
         </>

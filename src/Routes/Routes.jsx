@@ -8,7 +8,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import PrivateRouter from "./PrivateRouter";
 import CreateCommunity from "../Pages/CreateCommunity/CreateCommunity";
-import Communities from "../Pages/Communities/Communities";
+import SingleCommunity from "../Pages/SingleCommunity/SingleCommunity";
 
 const Routes = createBrowserRouter([
     {
@@ -16,8 +16,12 @@ const Routes = createBrowserRouter([
         element: <MainLayout />,
         children: [
             { path: '/', element: <Home /> },
-            { path: '/communities', element: <Communities/> },
             { path: '/create-community', element: <PrivateRouter><CreateCommunity/></PrivateRouter> },
+            { 
+                path:'/category/:id',
+                // loader: ({params})=>fetch(`${import.meta.env.VITE_api}/category/${params.id}`),
+                element:<PrivateRouter><SingleCommunity/></PrivateRouter>
+            },
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> }
         ]
