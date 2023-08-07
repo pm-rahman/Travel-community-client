@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const CommunityHeader = ({communityInfo}) => {
     const [isTramOpen, setIsTramOpen] = useState(false);
+    const [isJoin,setIsJoin] = useState(false);
     const {
         communityName,
         ProfilePhoto,
@@ -27,6 +28,7 @@ const CommunityHeader = ({communityInfo}) => {
                     {
                         isTramOpen && <p>{trams}</p>
                     }
+                    <button className="border bg-sky-600 px-6 py-2 rounded text-white">{!isJoin?"Join":"Already Join"}</button>
                 </div>
             </div>
             <hr />

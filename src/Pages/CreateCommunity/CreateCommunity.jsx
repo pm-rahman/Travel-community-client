@@ -63,7 +63,7 @@ const CreateCommunity = () => {
                         <textarea name="bio" type="url" placeholder="Community Bio" rows="4" required className="w-full border-b border-l p-2 mb-2"></textarea>
                         <textarea name="trams" type="url" placeholder="Community Trams & Condition" rows="4" required className="w-full border-b border-l p-2 mb-2"></textarea>
                         <p className="text-red-500 pl-2">{error ? error : ""}</p>
-                        <button type="submit" className="btn btn-info w-full text-white">Create</button>
+                        <button type="submit" className="btn btn-error w-full text-white">Create</button>
                     </form>
                 </div>
             </div>

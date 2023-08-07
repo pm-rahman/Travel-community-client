@@ -61,7 +61,7 @@ const CreatePost = () => {
                         <input name="postCover" type="url" placeholder="Post Cover Image" required className="w-full border-b border-l p-2 mb-2" />
                         <textarea name="postText" type="url" placeholder="Write Post Here" rows="4" required className="w-full border-b border-l p-2 mb-2"></textarea>
                         <p className="text-red-500 pl-2">{error ? error : ""}</p>
-                        <button type="submit" className="btn btn-info w-full text-white">Create Post</button>
+                        <button type="submit" className="btn btn-error w-full text-white">Create Post</button>
                     </form>
                 </div>
             </div>

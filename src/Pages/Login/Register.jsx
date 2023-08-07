@@ -71,7 +71,7 @@ const Register = () => {
                         <input name="confirmPassword" type={isPassShow ? 'text' : 'password'} placeholder="Confirm password" required className="w-full border-b border-l p-2 mb-2" />
                         <p className="text-red-500 pl-2">{error ? error : ""}</p>
                         <p onClick={() => setIsPassShow(!isPassShow)} className="text-sky-500 pl-2  hover:cursor-pointer mb-2">{isPassShow ? "Hide Password" : "Show Password"}</p>
-                        <button type="submit" className="btn btn-info w-full text-white mt-3">Register</button>
+                        <button type="submit" className="btn btn-error w-full text-white mt-3">Register</button>
                     </form>
                     <div className="mt-4 text-grey-600">
                         Already have an account?

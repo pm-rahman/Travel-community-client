@@ -24,7 +24,7 @@ const SingleCommunity = () => {
             <CommunityHeader communityInfo={communityInfo} />
             <div className="mt-3 grid md:grid-cols-3 gap-5">
                 <div className="border p-8 rounded">
-                    <h6 className="font-semibold inline text-lg mb-2 border-b">Creater: {communityInfo?.name}</h6>
+                    <h6 className="font-semibold inline text-lg mb-2">Creator: {communityInfo?.name}</h6>
                     <p className="flex gap-2 items-center"><Icon icon="fa-regular:envelope" /><span className="relative bottom-1">{communityInfo?.email}</span></p>
                     <p className="flex gap-2 items-center border-b"><Icon icon="fa-solid:phone-alt" /> {communityInfo?.phone}</p>
                     <p>{communityInfo?.bio}</p>

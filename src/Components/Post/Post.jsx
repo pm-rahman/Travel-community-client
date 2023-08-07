@@ -17,8 +17,8 @@ const Post = ({ post }) => {
             <div className="p-4 flex flex-col">
                 <h6 className="font-semibold capitalize leading-none mb-1">{authorName}</h6>
                 <h6 className="flex items-center gap-2 font-semibold capitalize mb-2">{postTitle}<span className="text-xs">({communityName})</span></h6>
-                <p className="text-xs max-h-32 mb-2">{postText}</p>
-                <Link to={`/post/${_id}`} className="btn mt-auto btn-info w-full text-white">Details</Link>
+                <p className="text-xs max-h-32 overflow-y-hidden mb-2">{postText}</p>
+                <Link to={`/post/${_id}`} className="btn mt-auto btn-error w-full text-white">Details</Link>
             </div>
         </div>
     );
