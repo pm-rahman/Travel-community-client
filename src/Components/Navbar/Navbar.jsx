@@ -24,9 +24,9 @@ const Navbar = () => {
     window.addEventListener('scroll', scrollStart);
     const navLink = <>
         <li><ActiveLink to="/"><Icon className="text-xl" icon="heroicons-outline:home" /><span>Home</span></ActiveLink></li>
-        <li><ActiveLink to='/community'><Icon className="text-xl" icon="mdi:account-multiple-check" /><span>Community</span></ActiveLink></li>
+        <li><ActiveLink to='/communities'><Icon className="text-xl" icon="mdi:account-multiple-check" /><span>Communities</span></ActiveLink></li>
         {user ? <>
-            <li><ActiveLink to="/add-blog"><Icon className="text-xl" icon="mdi:account-multiple-plus" /><span>Add Community</span></ActiveLink></li>
+            <li><ActiveLink to="/create-community"><Icon className="text-xl" icon="mdi:account-multiple-plus" /><span>Create Community</span></ActiveLink></li>
         </>
             : <li><ActiveLink to='/login'><Icon className="text-lg" icon="mdi:account-arrow-right" />Login</ActiveLink></li>
         }
@@ -43,7 +43,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to='/' className="hidden lg:flex btn btn-ghost h-16 uppercase pl-0 text-xl">
-                    <figure className="h-14 border-3 w-14 rounded-full overflow-hidden"><img className="h-full w-auto" src="" alt="" /></figure>
+                    <figure className="h-14 border-3 pl-0 rounded-full overflow-hidden"><img className="h-full w-auto" src="" alt="" /></figure>
                     <h3>Travel Community</h3>
                 </Link>
             </div>
@@ -55,7 +55,7 @@ const Navbar = () => {
                         {
                             user && <>
                                 <figure onClick={()=>setProfileShow(!profileShow)} title={user?.displayName} className="h-10 w-10 border-2 ml-2 overflow-hidden hover:cursor-pointer rounded-full"><img src={user?.photoURL || "https://www.pngkit.com/png/detail/202-2024572_png-file-svg-profile-icon-vector-png.png"} alt="User Photo" /></figure>
-                                <ul onClick={()=>setProfileShow(!profileShow)} className={`border rounded flex flex-col gap-0 absolute right-0 ${!profileShow?"top-[122%]":"-top-[200%]"}`}>
+                                <ul onClick={()=>setProfileShow(!profileShow)} className={`border bg-white rounded flex flex-col gap-0 absolute right-0 ${profileShow?"top-[123%]":"-top-[200%]"}`}>
                                     <li><ActiveLink to="/dashboard"><Icon className="text-xl" icon="mdi:view-dashboard" /><span>Dashboard</span></ActiveLink></li>
                                     <li
                                         className="hover:cursor-pointer flex gap-1"

@@ -14,9 +14,12 @@ const Register = () => {
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
+        const phone = form.phone.value;
         const photoUrl = form.photo.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
+
+        const user = { name, email,phone, photoUrl };
         if (password !== confirmPassword) {
             return setError("your password don't match");
         }
@@ -24,8 +27,23 @@ const Register = () => {
             .then(result => {
                 userUpdate(name, photoUrl)
                     .then(() => {
-                        naviGate('/');
-                        form.reset();
+                        fetch(`${import.meta.env.VITE_api}/user`,{
+                            method:"PUT",
+                            headers:{
+                                "content-type":"application/json"
+                            },
+                            body:JSON.stringify(user)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                form.reset();
+                                naviGate('/');
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                setError("Some thing was Wrong");
+                            })
                     })
                     .catch((err) => {
                         console.log(err);
@@ -37,7 +55,6 @@ const Register = () => {
                 console.log(err);
                 setError("Some thing was Wrong");
             })
-        const user = { name, email, photoUrl, password };
         console.log(user);
     }
     return (
@@ -48,6 +65,7 @@ const Register = () => {
                         <h4 className="mb-3 text-2xl">Create An Account</h4>
                         <input name="name" type="text" placeholder="Name" required className="w-full border-b border-l p-2 mb-2" />
                         <input name="email" type="email" placeholder="Email" required className="w-full border-b border-l p-2 mb-2" />
+                        <input name="phone" type="number" placeholder="Phone" required className="w-full border-b border-l p-2 mb-2" />
                         <input name="photo" type="url" placeholder="Photo Url" required className="w-full border-b border-l p-2 mb-2" />
                         <input name="password" type={isPassShow ? 'text' : 'password'} placeholder="password" required className="w-full border-b border-l p-2 mb-2" />
                         <input name="confirmPassword" type={isPassShow ? 'text' : 'password'} placeholder="Confirm password" required className="w-full border-b border-l p-2 mb-2" />
