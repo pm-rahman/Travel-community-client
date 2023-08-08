@@ -40,8 +40,7 @@ const EditCommunity = () => {
             body: JSON.stringify(UpdateCommunity)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(() => {
                 form.reset();
                 naviGate('/');
             })
@@ -49,7 +48,6 @@ const EditCommunity = () => {
                 console.log(err);
                 setError("Some thing was Wrong");
         })
-        // console.log(community);
     }
     return (
         <div className="mx-12 border-t sm:mx-20 md:mx-32 py-12">

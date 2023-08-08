@@ -17,20 +17,23 @@ const CreatePost = () => {
         setError('');
         const form = event.target;
         const postTitle = form.postTitle.value;
+        const from = form.from.value;
+        const destination = form.destination.value;
         const postCover = form.postCover.value;
         const postText = form.postText.value;
 
         const post = {
-            CommunityId:_id,
-            authorName:name,
+            CommunityId: _id,
+            authorName: name,
             email,
             phone,
             communityName,
             postTitle,
+            from,
+            destination,
             postCover,
             postText
         };
-        console.log(post);
         // fetch api
         fetch(`${import.meta.env.VITE_api}/create-post`, {
             method: "PUT",
@@ -40,8 +43,7 @@ const CreatePost = () => {
             body: JSON.stringify(post)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(() => {
                 form.reset();
                 naviGate('/');
             })
@@ -58,6 +60,10 @@ const CreatePost = () => {
                     <form onSubmit={postFormHandler} className="flex flex-col gap-3">
                         <h4 className="mb-3 text-2xl">Create a Post</h4>
                         <input name="postTitle" type="text" placeholder="Post Title" required className="w-full border-b border-l p-2 mb-2" />
+                        <div className="grid grid-cols-2 gap-3">
+                            <input name="from" type="text" placeholder="From Where" required className="w-full border-b border-l p-2 mb-2" />
+                            <input name="destination" type="text" placeholder="Destination" required className="w-full border-b border-l p-2 mb-2" />
+                        </div>
                         <input name="postCover" type="url" placeholder="Post Cover Image" required className="w-full border-b border-l p-2 mb-2" />
                         <textarea name="postText" type="url" placeholder="Write Post Here" rows="4" required className="w-full border-b border-l p-2 mb-2"></textarea>
                         <p className="text-red-500 pl-2">{error ? error : ""}</p>

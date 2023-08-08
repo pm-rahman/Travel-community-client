@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const EditPost = () => {
-    const [error,setError] = useState('');
+    const [error, setError] = useState('');
     const {
         _id,
         postTitle,
+        from,
+        destination,
         postCover,
         postText
-
     } = useLoaderData();
 
     const naviGate = useNavigate();
@@ -17,11 +18,15 @@ const EditPost = () => {
         setError('');
         const form = event.target;
         const postTitle = form.postTitle.value;
+        const from = form.from.value;
+        const destination = form.destination.value;
         const postCover = form.postCover.value;
         const postText = form.postText.value;
 
         const updatePost = {
             postTitle,
+            from,
+            destination,
             postCover,
             postText
         };
@@ -34,8 +39,7 @@ const EditPost = () => {
             body: JSON.stringify(updatePost)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then(() => {
                 form.reset();
                 naviGate('/');
             })
@@ -52,6 +56,10 @@ const EditPost = () => {
                     <form onSubmit={updatePostFormHandler} className="flex flex-col gap-3">
                         <h4 className="mb-3 text-2xl">Create a Post</h4>
                         <input name="postTitle" type="text" defaultValue={postTitle} placeholder="Post Title" required className="w-full border-b border-l p-2 mb-2" />
+                        <div className="grid grid-cols-2 gap-3">
+                            <input name="from" type="text" defaultValue={from} placeholder="From Where" required className="w-full border-b border-l p-2 mb-2" />
+                            <input name="destination" type="text" defaultValue={destination} placeholder="Destination" required className="w-full border-b border-l p-2 mb-2" />
+                        </div>
                         <input name="postCover" type="url" defaultValue={postCover} placeholder="Post Cover Image" required className="w-full border-b border-l p-2 mb-2" />
                         <textarea name="postText" type="url" defaultValue={postText} placeholder="Write Post Here" rows="4" required className="w-full border-b border-l p-2 mb-2"></textarea>
                         <p className="text-red-500 pl-2">{error ? error : ""}</p>

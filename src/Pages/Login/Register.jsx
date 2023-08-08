@@ -35,8 +35,7 @@ const Register = () => {
                             body:JSON.stringify(user)
                         })
                             .then(res => res.json())
-                            .then(data => {
-                                console.log(data);
+                            .then(() => {
                                 form.reset();
                                 naviGate('/');
                             })
@@ -49,13 +48,11 @@ const Register = () => {
                         console.log(err);
                         setError("Some thing was Wrong");
                     })
-                console.log(result.user);
             })
             .catch((err) => {
                 console.log(err);
                 setError("Some thing was Wrong");
             })
-        console.log(user);
     }
     return (
         <div className="mx-12 border-t sm:mx-20 md:mx-32 py-12">

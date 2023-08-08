@@ -17,7 +17,7 @@ const Post = ({ post, postDeleteHandler }) => {
     return (
         <div className="rounded overflow-hidden shadow-xl">
             <div className="h-56 relative overflow-hidden">
-                <img src={postCover} alt="Shoes" />
+                <img className="w-full" src={postCover} alt="Shoes" />
             </div>
             <div className="p-4 flex flex-col">
                 <div className="flex justify-between">

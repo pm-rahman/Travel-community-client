@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hook/useAuth";
 import { Link } from "react-router-dom";
 
-const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
+const CommunityHeader = ({ communityInfo, communityDeleteHandler }) => {
     const [isTramOpen, setIsTramOpen] = useState(false);
     const { user } = useAuth();
     const [isJoin, setIsJoin] = useState(false);
@@ -14,13 +14,14 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
         ProfilePhoto,
         coverPhoto,
         trams,
-        member
+        joinedEmail
     } = communityInfo;
+
     useEffect(() => {
         fetch(`${import.meta.env.VITE_api}/check-member/${_id}?email=${user?.email}`)
             .then(res => res.json())
-            .then(data => {
-                setIsTramOpen(data);
+            .then(data => { 
+                setIsJoin(data);
             })
             .catch(err => {
                 console.log(err);
@@ -28,7 +29,6 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
     }, [_id, user])
     // join handler
     const joinButtonHandler = () => {
-        console.log('click hoice');
         fetch(`${import.meta.env.VITE_api}/join-member/${_id}`, {
             method: "PUT",
             headers: {
@@ -37,12 +37,11 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
             body: JSON.stringify({ email: user?.email })
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(() => {});
         setIsJoin(!isJoin);
     }
     // join withdrew handler
     const joinDeleteHandler = () => {
-        console.log('click hoice');
         fetch(`${import.meta.env.VITE_api}/delete-member/${_id}`, {
             method: "PUT",
             headers: {
@@ -51,7 +50,7 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
             body: JSON.stringify({ email: user?.email })
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(() => {});
         setIsJoin(!isJoin);
     }
 
@@ -63,16 +62,18 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
             </div>
             <div className="flex gap-2 relative bottom-10 ml-8">
                 <figure className="h-48 w-48 border-4 rounded-full overflow-hidden"><img className="h-full min-w-full" src={ProfilePhoto} alt="" /></figure>
-                <div className="mt-12">
+                <div className="mt-14">
                     <div>
                         <h1 className="font-semibold text-4xl">{communityName}</h1>
                         <div className="flex gap-2 items-center">
-                            <p>{member ? member : 0} Members</p>
+                            <p>{joinedEmail ? joinedEmail.length : 0} Members</p>
                             <Icon onClick={() => setIsTramOpen(!isTramOpen)} className="text-xl" icon="fa-solid:exclamation-circle" />
                         </div>
                     </div>
                     {
                         !isTramOpen && <p>{trams}</p>
+                    }
+                    {user?.email === email && <Link to={`/community-Dashboard/${_id}`} className="border mt-2 bg-sky-600 px-6 py-2 mr-2 rounded text-white">Dashboard</Link>
                     }
                     {!isJoin
                         ? <button onClick={() => joinButtonHandler()} className="border mt-2 bg-sky-600 px-6 py-2 rounded text-white">Join</button>
@@ -83,7 +84,7 @@ const CommunityHeader = ({ communityInfo,communityDeleteHandler }) => {
                     {user?.email === email
                         && <div className="flex gap-2 items-center">
                             <Link to={`/edit-community/${_id}`}><Icon className="text-xl" icon="fa-solid:edit" /></Link>
-                            <button onClick={() =>communityDeleteHandler(_id)}><Icon className="text-xl" icon="fa-regular:trash-alt" /></button>
+                            <button onClick={() => communityDeleteHandler(_id)}><Icon className="text-xl" icon="fa-regular:trash-alt" /></button>
                         </div>
                     }
                 </div>

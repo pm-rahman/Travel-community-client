@@ -13,6 +13,7 @@ import CreatePost from "../Pages/CreatePost/CreatePost";
 import SinglePost from "../Pages/SinglePost/SinglePost";
 import EditCommunity from "../Pages/EditCommunity/editCommunity";
 import EditPost from "../Pages/EditPost/EditPost";
+import CommunityDashboard from "../Pages/CommunityDashboard/CommunityDashboard";
 
 const Routes = createBrowserRouter([
     {
@@ -31,9 +32,14 @@ const Routes = createBrowserRouter([
                 loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params.id}`),
                 element:<PrivateRouter><EditCommunity/></PrivateRouter>
             },
+            { 
+                path:'/community-Dashboard/:id',
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params.id}`),
+                element:<PrivateRouter><CommunityDashboard/></PrivateRouter>
+            },
             {
                 path:'/create-post/:id',
-                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/create-post/${params?.id}`),
+                loader: ({params})=>fetch(`${import.meta.env.VITE_api}/community/${params?.id}`),
                 element:<PrivateRouter><CreatePost/></PrivateRouter>
             },
             {

@@ -55,7 +55,6 @@ const Navbar = () => {
                             user && <>
                                 <figure onClick={()=>setProfileShow(!profileShow)} title={user?.displayName} className="h-10 w-10 border-2 ml-2 overflow-hidden hover:cursor-pointer rounded-full"><img src={user?.photoURL || "https://www.pngkit.com/png/detail/202-2024572_png-file-svg-profile-icon-vector-png.png"} alt="User Photo" /></figure>
                                 <ul onClick={()=>setProfileShow(!profileShow)} className={`border bg-white rounded flex flex-col gap-0 absolute right-0 ${profileShow?"top-[123%]":"-top-[200%]"}`}>
-                                    <li><ActiveLink to="/dashboard"><Icon className="text-xl" icon="mdi:view-dashboard" /><span>Dashboard</span></ActiveLink></li>
                                     <li
                                         className="hover:cursor-pointer flex gap-1"
                                         onClick={() => logOutHandler()}

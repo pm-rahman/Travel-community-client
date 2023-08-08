@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 
 const Login = () => {
     const {loginHandler}= useAuth();
     const [error, setError] = useState('');
     const [isPassShow, setIsPassShow] = useState(false);
+    const location = useLocation();
     const naviGate = useNavigate();
+    let from = location.state?.from?.pathname || "/";
 
 
     const loginFormHandler = (event) => {
@@ -16,10 +18,9 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         loginHandler(email,password)
-        .then(result=>{
-            console.log(result)
+        .then(()=>{
             form.reset();
-            naviGate('/');
+            naviGate(from);
         })
         .catch(err=>{
             console.log(err.message);
